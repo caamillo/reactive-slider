@@ -1,3 +1,7 @@
+#root {
+    background: #121212;
+}
+
 .slider {
     -webkit-appearance: none;
     height: 10px;
@@ -6,7 +10,6 @@
     opacity: 1;
     border-radius: 30px;
     transform: rotate(270deg);
-    
   }
   
   .slider::-webkit-slider-thumb {
@@ -16,7 +19,14 @@
     aspect-ratio: 1 / 1;
     background: #a26ed2;
     border-radius: 50%;
+    transition: all .2s;
     cursor: default;
+  }
+
+  .slider::-webkit-slider-thumb:hover {
+    border: 2px solid #121212;
+    box-shadow: 0 0 0 4px #a26ed2;
+    background: #855aad;
   }
   
   .slider::-moz-range-thumb {
@@ -26,6 +36,7 @@
     aspect-ratio: 1 / 1;
     background: #a26ed2;
     border-radius: 50%;
+    box-shadow: 0 0 0 2px #a26ed2;
     cursor: default;
   }
   
