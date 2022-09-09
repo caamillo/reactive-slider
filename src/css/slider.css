@@ -1,0 +1,31 @@
+.slider {
+    -webkit-appearance: none;
+    height: 10px;
+    width: 45%;
+    background: #575757;
+    opacity: 1;
+    border-radius: 30px;
+    transform: rotate(270deg);
+    
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    aspect-ratio: 1 / 1;
+    background: #a26ed2;
+    border-radius: 50%;
+    cursor: default;
+  }
+  
+  .slider::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    aspect-ratio: 1 / 1;
+    background: #a26ed2;
+    border-radius: 50%;
+    cursor: default;
+  }
+  
