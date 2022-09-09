@@ -30,6 +30,25 @@ function App() {
   
   }
 
+  const handleSlider = (e) => {
+    const sliderBar = document.getElementById('slider-bar')
+    const sliderBtn = document.getElementById('slider-button')
+
+    const sliderHeight = parseInt(sliderBar.getBoundingClientRect().height) - sliderBarOffsetY
+    const cursorY = getRelativeCoordinates(e, document.getElementById('slider-bar')).y
+    let slidingPerc = ((sliderHeight - cursorY) / sliderHeight) * 100
+
+    if (slidingPerc > 100) slidingPerc = 100
+    else if (slidingPerc < 0) slidingPerc = 0
+
+    let barPerc = sliderBarMaxY - ((slidingPerc * (sliderBarMaxY - sliderBarMinY)) / 100)
+
+    return {
+      barPerc,
+      slidingPerc
+    }
+  }
+
   useEffect(() => {
     const sliderBar = document.getElementById('slider-bar')
     const sliderBtn = document.getElementById('slider-button')
@@ -52,27 +71,30 @@ function App() {
     const sliderBar = document.getElementById('slider-bar')
     const sliderBtn = document.getElementById('slider-button')
 
-    const endSliding = (e) => {
+    const endSliding = () => {
       if (isSliding) {
         console.log('end sliding')
         sliderBtn.style.backgroundColor = '#a26ed2'
         setIsSliding(false)
-        const sliderHeight = parseInt(sliderBar.getBoundingClientRect().height) - sliderBarOffsetY
-        const cursorY = getRelativeCoordinates(e, document.getElementById('slider-bar')).y
-        const slidingPerc = ((sliderHeight - cursorY) / sliderHeight) * 100
-        let barPerc = sliderBarMaxY - ((slidingPerc * (sliderBarMaxY - sliderBarMinY)) / 100)
-        if (barPerc > sliderBarMaxY) barPerc = sliderBarMaxY
-        else if (barPerc < sliderBarMinY) barPerc = sliderBarMinY
+      }
+    }
+
+    const sliding = (e) => {
+      if (isSliding) {
+        const { barPerc, slidingPerc } = handleSlider(e)
         sliderBtn.style.top = barPerc + '%'
-        console.log(barPerc)
+        console.log(barPerc, slidingPerc)
       }
     }
 
     root.addEventListener('mouseup', endSliding)
+    root.addEventListener('mousemove', sliding)
 
     return () => {
       root.removeEventListener('mouseup', endSliding)
+      root.removeEventListener('mousemove', sliding)
     }
+
   }, [isSliding])
 
   return (
