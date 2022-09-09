@@ -102,7 +102,7 @@ function App() {
       <div className='flex items-center justify-center h-full'>
         <div className='bg-[#0f0f0f] aspect-video w-[50%] flex justify-center rounded-lg'>
           <div id='slider-bar' className='bg-[#454545] h-full m-5 w-[15px] rounded-md flex flex-col items-center justify-end'>
-            <div id='slider-button' className='aspect-square w-[40px] bg-[#a26ed2] flex justify-center items-center rounded-[50%] cursor-default absolute top-[83%]'>
+            <div id='slider-button' className='aspect-square w-[40px] bg-[#a26ed2] border-4 border-[#121212] shadow-[0_0_0_2px_#a26ed2] flex justify-center items-center rounded-[50%] cursor-default absolute top-[83%]'>
               
             </div>
           </div>
