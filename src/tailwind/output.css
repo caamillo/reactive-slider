@@ -549,6 +549,50 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.bottom-0 {
+  bottom: 0px;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.top-5 {
+  top: 1.25rem;
+}
+
+.top-10 {
+  top: 2.5rem;
+}
+
+.bottom-10 {
+  bottom: 2.5rem;
+}
+
+.top-\[100\%\] {
+  top: 100%;
+}
+
+.bottom-\[10px\] {
+  bottom: 10px;
+}
+
+.bottom-\[85\%\] {
+  bottom: 85%;
+}
+
+.top-\[85\%\] {
+  top: 85%;
+}
+
+.top-\[83\%\] {
+  top: 83%;
+}
+
 .m-3 {
   margin: 0.75rem;
 }
@@ -667,6 +711,10 @@ video {
 
 .items-center {
   align-items: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
