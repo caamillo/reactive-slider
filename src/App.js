@@ -7,17 +7,9 @@ import './tailwind/output.css'
 function App() {
 
   const [isSliding, setIsSliding] = useState(false)
-
-  useEffect(() => {
-    const sliderBtn = document.getElementById('slider-button')
-    sliderBtn.addEventListener('mousedown', () => {
-      if (!isSliding) {
-        sliderBtn.style.backgroundColor = '#8359ac'
-        setIsSliding(true)
-        console.log('sliding')
-      }
-    })
-  }, [])
+  const sliderBarOffsetY = 14
+  const sliderBarMaxY = 83
+  const sliderBarMinY = 9
 
   const getRelativeCoordinates = (event, referenceElement) => {
 
@@ -31,8 +23,6 @@ function App() {
       top: referenceElement.offsetTop
     };
   
-    let reference = referenceElement.offsetParent;
-  
     return { 
       x: position.x - offset.left,
       y: position.y - offset.top,
@@ -41,7 +31,25 @@ function App() {
   }
 
   useEffect(() => {
+    const sliderBar = document.getElementById('slider-bar')
+    const sliderBtn = document.getElementById('slider-button')
+
+    sliderBtn.addEventListener('mousedown', (e) => {
+      if (!isSliding) {
+        sliderBtn.style.backgroundColor = '#8359ac'
+        setIsSliding(true)
+        console.log('sliding')
+        const sliderHeight = parseInt(sliderBar.getBoundingClientRect().height) - sliderBarOffsetY
+        const cursorY = getRelativeCoordinates(e, document.getElementById('slider-bar')).y
+        console.log(sliderHeight - cursorY)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
     const root = document.getElementById('root')
+
+    const sliderBar = document.getElementById('slider-bar')
     const sliderBtn = document.getElementById('slider-button')
 
     const endSliding = (e) => {
@@ -49,7 +57,14 @@ function App() {
         console.log('end sliding')
         sliderBtn.style.backgroundColor = '#a26ed2'
         setIsSliding(false)
-        console.log(getRelativeCoordinates(e, document.getElementById('slider-bar')))
+        const sliderHeight = parseInt(sliderBar.getBoundingClientRect().height) - sliderBarOffsetY
+        const cursorY = getRelativeCoordinates(e, document.getElementById('slider-bar')).y
+        const slidingPerc = ((sliderHeight - cursorY) / sliderHeight) * 100
+        let barPerc = sliderBarMaxY - ((slidingPerc * (sliderBarMaxY - sliderBarMinY)) / 100)
+        if (barPerc > sliderBarMaxY) barPerc = sliderBarMaxY
+        else if (barPerc < sliderBarMinY) barPerc = sliderBarMinY
+        sliderBtn.style.top = barPerc + '%'
+        console.log(barPerc)
       }
     }
 
