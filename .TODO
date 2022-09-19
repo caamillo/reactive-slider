@@ -2,4 +2,4 @@ Shake effect when change top
 api -> backend
 api (every clock when change send to backend)
 graph animation background
-fix mobile responsive
+- fix mobile responsive
