@@ -13,6 +13,18 @@ function App() {
 
   const [isChanging, setIsChanging] = useState(false)
 
+  useEffect(() => {
+    ;(async () => {
+      fetch('http://192.168.178.25:5000/board/kas/getKas?wait=false')
+      .then(res => res.text())
+      .then(data => {
+        const power = JSON.parse(data)['kas']['power']
+        console.log('Start Power', power)
+        document.getElementById('slider').value = power
+      })
+    })()
+  }, [])
+
   const changeKas = (e) => {
     if (!isChanging) {
       setIsChanging(true)

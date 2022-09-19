@@ -1,5 +1,5 @@
 Shake effect when change top
-api -> backend
-api (every clock when change send to backend)
+- api -> backend
+- api (every clock when change send to backend)
 graph animation background
 - fix mobile responsive
