@@ -9,11 +9,39 @@ import './css/slider.css'
 
 function App() {
 
+  const kasTick = 1e3
+
+  const [isChanging, setIsChanging] = useState(false)
+
+  const changeKas = (e) => {
+    if (!isChanging) {
+      setIsChanging(true)
+    }
+  }
+
+  useEffect(() => {
+
+    const uploadData = async (power) => await fetch(`http://localhost:5000/board/kas/change?power=${power}`, {
+      method: 'GET',
+      mode: 'no-cors',
+      cache: 'no-cache',
+    })
+
+    if (isChanging) {
+      setTimeout(async () => {
+        const power = document.getElementById('slider').value
+        console.log('prevData', power)
+        await uploadData(power)
+        setIsChanging(false)
+      }, kasTick)
+    }
+  }, [isChanging])
+
   return (
     <div className="App h-screen">
       <div className='flex items-center justify-center h-full'>
         <div className='slider-container bg-[#0f0f0f] md:aspect-video h-[65%] w-[65%] m-[30px] flex justify-center items-center rounded-lg'>
-          <input id="typeinp" type="range" min="0" className='slider' max="100" defaultValue="0" step="1" onChange={ (e) => console.log(e.target.value) }/>
+          <input id="slider" type="range" min="0" className='slider' max="100" defaultValue="0" step="1" onChange={ changeKas }/>
         </div>
       </div>
     </div>
